@@ -1,6 +1,6 @@
 import os
 import streamlit as st
-from generate import load_model, generate
+import generate as gen
 
 st.set_page_config(
     page_title="TurkLM - Türkçe GPT Metin Üreteci",
@@ -59,7 +59,7 @@ def get_model():
     if not os.path.exists(checkpoint_path):
         return None, None, None
     try:
-        return load_model(checkpoint_path)
+        return gen.load_model(checkpoint_path)
     except Exception as e:
         st.error(f"Model yüklenirken hata oluştu: {e}")
         return None, None, None
@@ -131,7 +131,7 @@ if st.button("Metni Devam Ettir"):
     else:
         with st.spinner("TurkLM metni üretiyor..."):
             try:
-                result = generate(
+                result = gen.generate(
                     model=model,
                     tokenizer=tokenizer,
                     device=device,
