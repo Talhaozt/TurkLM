@@ -1,5 +1,6 @@
 # 🇹🇷 TurkLM — Character-Level Turkish GPT Model
 
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://turklm-k4gp744ybqjc6772rhs87h.streamlit.app)
 [![Python](https://img.shields.io/badge/Python-3.9+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)](https://pytorch.org/)
 [![Gradio](https://img.shields.io/badge/Gradio-UI-FF6B6B?style=for-the-badge&logo=gradio&logoColor=white)](https://gradio.app/)
