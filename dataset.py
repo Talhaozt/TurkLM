@@ -43,10 +43,15 @@ def download_turkish_data(sample_size=100000):
 
 
 class CharecterTokenizer:
-    def __init__(self, text: str):
-        self.characters = sorted(list(set(text)))
-        self.vocab_size = len(self.characters)
+    def __init__(self, text: str = None, characters: list = None):
+        if characters is not None:
+            self.characters = sorted(list(set(characters)))
+        elif text is not None:
+            self.characters = sorted(list(set(text)))
+        else:
+            raise ValueError("Either text or characters must be provided.")
 
+        self.vocab_size = len(self.characters)
         self.char_to_id = {char: i for i, char in enumerate(self.characters)}
         self.id_to_char = {i: char for i, char in enumerate(self.characters)}
 

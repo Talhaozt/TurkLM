@@ -3,19 +3,30 @@ import torch
 from model import GPT
 from dataset import *
 
-def load_model(checkpoint_path: str = 'checkpoints/model.pt'):
+import json
 
-    device = torch.device('mps' if not torch.cuda.is_available() else 'cpu')
+def load_model(checkpoint_path: str = 'checkpoints/model.pt', vocab_path: str = 'checkpoints/vocab.json'):
+
+    if torch.cuda.is_available():
+        device = torch.device('cuda')
+    elif torch.backends.mps.is_available():
+        device = torch.device('mps')
+    else:
+        device = torch.device('cpu')
+
     checkpoint = torch.load(checkpoint_path, map_location=device, weights_only=False)
 
     config = checkpoint['config']
 
-    download_turkish_data()
-
-    with open(DATA_PATH, 'r', encoding='utf-8') as f:
-        text = f.read()
-
-    tokenizer = CharecterTokenizer(text)
+    if os.path.exists(vocab_path):
+        with open(vocab_path, 'r', encoding='utf-8') as f:
+            characters = json.load(f)
+        tokenizer = CharecterTokenizer(characters=characters)
+    else:
+        download_turkish_data()
+        with open(DATA_PATH, 'r', encoding='utf-8') as f:
+            text = f.read()
+        tokenizer = CharecterTokenizer(text=text)
 
     model = GPT(
         vocab_size=config['vocab_size'],
