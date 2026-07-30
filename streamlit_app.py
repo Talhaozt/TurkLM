@@ -104,7 +104,8 @@ col1, col2 = st.columns(2)
 with col1:
     st.subheader("Başlangıç Metni (Prompt)")
     prompt = st.text_area(
-        label="",
+        label="Prompt",
+        label_visibility="collapsed",
         placeholder="Örn: Yapay zeka teknolojisi gelecekte...",
         height=220
     )
@@ -120,7 +121,7 @@ with col1:
 with col2:
     st.subheader("Modelin Ürettiği Sonuç")
     output_container = st.empty()
-    output_container.text_area(label="", value="", height=280, disabled=True)
+    output_container.text_area(label="Sonuc", label_visibility="collapsed", value="", height=280, disabled=True)
 
 # Üretim Butonu
 if st.button("Metni Devam Ettir"):
@@ -139,6 +140,6 @@ if st.button("Metni Devam Ettir"):
                     max_tokens=int(max_tokens),
                     temperature=float(temperature)
                 )
-                output_container.text_area(label="", value=result, height=280)
+                output_container.text_area(label="Sonuc", label_visibility="collapsed", value=result, height=280)
             except Exception as e:
                 st.error(f"Üretim sırasında hata oluştu: {e}")
